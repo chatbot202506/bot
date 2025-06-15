@@ -1,16 +1,17 @@
-import streamlit as st
 import openai
+import streamlit as st
 import json
 from openai import OpenAIError, RateLimitError, AuthenticationError
 from dotenv import load_dotenv
 import os
+
 load_dotenv()
 openai_api_key = os.getenv("OPENAI_API_KEY")
-# Перевірка, що ключ дійсно завантажився
 if not openai_api_key:
     raise ValueError("Не знайдено OPENAI_API_KEY у .env файлі!")
 
-# --- Завантаження курсів ---
+openai.api_key = openai_api_key
+
 with open('courses.json', encoding='utf-8') as f:
     courses = json.load(f)
 
